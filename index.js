@@ -136,10 +136,10 @@ console.log(baby1.play());
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. If a function is in global scope, then this will return the window 
+  2. When you invoke a function with a dot, then the object would be 'this' for example: object.function() object would be this
+  3. In a constructor function, this refers to a instance of the object that is created and returned by the constructor function
+  4. When using .call or .apply this is explicitly defined
 */
 
 
