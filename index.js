@@ -39,9 +39,46 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+//give person ability to poop
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+//toString
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const personOne = new Person('William', 21);
+const personTwo = new Person('Grady', 33);
+const personThree = new Person('Cheree', 41);
+
+// console.log(personOne.toString());
+// console.log(personTwo.toString());
+// console.log(personThree.toString());
+
+// personTwo.eat('pizza');
+// personTwo.eat('snails');
+// personTwo.eat('sandwich');
+// personTwo.eat('tootsie roll');
+
+// console.log(personTwo.stomach);
+// personTwo.poop();
+// console.log(personTwo.stomach);
 
 /*
   TASK 2
@@ -57,10 +94,23 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill= function(gallons){
+  this.tank += gallons;
+}
+const carOne = new Car({
+  model: 'Kia', 
+  milesPerGallon: 21,
+})
 
+console.log(carOne.model)
+carOne.fill(5);
+console.log(carOne.tank)
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -68,9 +118,19 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype); //inheriting methods from Person
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`
+}
+const baby1 = new Baby('Rudy', 1, 'football')
+
+console.log(baby1);
+console.log(baby1.play());
 
 /* 
   TASK 4
