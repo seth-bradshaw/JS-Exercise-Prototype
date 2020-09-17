@@ -103,14 +103,21 @@ function Car(model, milesPerGallon) {
 Car.prototype.fill= function(gallons){
   this.tank += gallons;
 }
-const carOne = new Car({
-  model: 'Kia', 
-  milesPerGallon: 21,
-})
+Car.prototype.drive = function(distance){
+  this.odometer += distance;
+  this.tank -= distance / this.milesPerGallon;
+}
 
-console.log(carOne.model)
-carOne.fill(5);
+
+const carOne = new Car('Kia', 21)
+
+// console.log(carOne)
+carOne.fill(50);
 console.log(carOne.tank)
+carOne.drive(40);
+console.log(carOne.tank)
+console.log(carOne.odometer)
+
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -129,8 +136,8 @@ Baby.prototype.play = function(){
 }
 const baby1 = new Baby('Rudy', 1, 'football')
 
-console.log(baby1);
-console.log(baby1.play());
+// console.log(baby1);
+// console.log(baby1.play());
 
 /* 
   TASK 4
@@ -139,7 +146,7 @@ console.log(baby1.play());
   1. If a function is in global scope, then this will return the window 
   2. When you invoke a function with a dot, then the object would be 'this' for example: object.function() object would be this
   3. In a constructor function, this refers to a instance of the object that is created and returned by the constructor function
-  4. When using .call or .apply this is explicitly defined
+  4. When using .call this is explicitly defined
 */
 
 
